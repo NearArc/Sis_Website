@@ -1,34 +1,36 @@
+// src/App.jsx
 import useLenis from "./lenis";
-import useScrollAnim from "./scrollAnim";
+
+import Nav from "./components/Nav"; // sticky top bar
+import Hero from "./sections/Hero"; // backdrop, hills, Emilee
 
 export default function App() {
-  useLenis();
-  useScrollAnim();
+  useLenis(); // smooth scrolling everywhere
 
   return (
-    <main className="flex flex-col items-center bg-brandBlue text-white">
-      {/* hero */}
-      <section className="flex min-h-screen flex-col items-center justify-center gap-6">
-        <h1
-          id="heroTitle"
-          className="text-red-500 text-5xl font-extrabold text-center"
-        >
-          Hello, Sis!
-        </h1>
-        <p className="text-xl">Scroll to see the magic</p>
+    <main className="text-white">
+      {/* fixed translucent menu */}
+      <Nav />
+
+      {/* full-screen hero (backdrop + hills + Emilee) */}
+      <Hero />
+
+      {/* ---  placeholders for upcoming sections  --- */}
+
+      <section
+        id="books"
+        className="h-screen flex items-center justify-center bg-brandBlue"
+      >
+        <p className="text-3xl font-bold">Book scenes coming soon…</p>
       </section>
 
-      {/* content cards */}
-      <section className="flex flex-col items-center gap-10 py-20">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="card w-80 rounded-xl bg-white/10 p-6 text-center backdrop-blur-md"
-          >
-            <h2 className="mb-2 text-2xl font-bold">Card {i}</h2>
-            <p>Some bubbly info for card {i}. Keep scrolling.</p>
-          </div>
-        ))}
+      <section
+        id="about"
+        className="h-screen flex items-center justify-center bg-dirt"
+      >
+        <p className="text-3xl font-bold">
+          About the author (down in the “dirt”)
+        </p>
       </section>
     </main>
   );
