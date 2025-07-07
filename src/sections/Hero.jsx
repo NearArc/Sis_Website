@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Hero() {
   const root = useRef(null);
 
-  // tiny parallax so layers drift at different speeds
+  // light parallax on the two hills
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to("#midHill", {
@@ -36,8 +36,6 @@ export default function Hero() {
       {/* distant backdrop */}
       <img
         src={backdrop}
-        alt=""
-        className="layer object-cover"
         aria-hidden="true"
       />
 
