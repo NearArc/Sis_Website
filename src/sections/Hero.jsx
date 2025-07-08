@@ -1,27 +1,39 @@
+// src/sections/Hero.jsx
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import backdrop from "../assets/backdrop.png";
-import midHill from "../assets/hill.png";
-import foreHill from "../assets/smallhill.png";
-import emilee from "../assets/emilee.png";
+import treesnhills from "../assets/treesnhills.png";
+import midHill from "../assets/hills.png";
+import stella from "../assets/sustainablestellacutout.png";
+import friend from "../assets/sustainablestellaothergirl.png";
+import paper from "../assets/paper.webm";
+import sign from "../assets/Emnstella.webm";
+import facpath from "../assets/backdropv2.png";
+import clouds from "../assets/clouds.webm";
+import hedge from "../assets/hedge.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const root = useRef(null);
 
-  // light parallax on the two hills
+  // light parallax on the hill
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to("#midHill", {
         y: 30,
         scrollTrigger: { trigger: root.current, start: "top top", scrub: true },
       });
-      gsap.to("#foreHill", {
-        y: 60,
-        scrollTrigger: { trigger: root.current, start: "top top", scrub: true },
+
+      /* paper video pop-in */
+      gsap.from("#paperVid", {
+        opacity: 0,
+        y: -60,
+        scale: 0.8,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: { trigger: root.current, start: "top 80%" }, // fires once
       });
     }, root);
     return () => ctx.revert();
@@ -31,43 +43,145 @@ export default function Hero() {
     <section
       ref={root}
       id="hero"
-      className="scene bg-gradient-to-b from-skyStart to-skyEnd text-white"
+      className="scene text-white bg-gradient-to-b from-skyStart to-skyEnd"
     >
-      {/* distant backdrop */}
+      {/* ── 1 ▸ factory backdrop ─────────────────────── */}
       <img
-        src={backdrop}
+        src={facpath}
+        alt=""
         aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-top"
       />
 
-      {/* mid-ground hill */}
+      {/* ── 1 ▸ treesnhills fills every pixel ─────────────────────── */}
       <img
+        src={treesnhills}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-top"
+      />
+
+      {/* Clouds First  
+      <video
+        id="clouds"
+        src={clouds}
+        autoPlay
+        muted
+        playsInline
+        className="
+          absolute top-[-1%] left-[6%] 
+          -translate-x-1/4
+          w-[100vw] max-w-[600px] object-cover z-10
+        
+        "
+      />
+
+      {/* Clouds Second 
+      <video
+        id="clouds"
+        src={clouds}
+        autoPlay
+        muted
+        playsInline
+        className="
+          absolute top-[-1%] left-[12%] 
+          -translate-x-1/4
+          w-[100vw] max-w-[600px] object-cover z-10
+           animate-fade delay-500
+        "
+      />
+
+      {/* Clouds Third 
+      <video
+        id="clouds2"
+        src={clouds}
+        autoPlay
+        muted
+        playsInline
+        className="
+          absolute top-[-1%] left-[25.7%] 
+          -translate-x-1/4
+          w-[100vw] max-w-[600px] object-cover z-10
+          animate-fade delay-900
+        "
+      /> */}
+
+      {/* paper video */}
+      <video
+        id="paperVid"
+        src={paper}
+        autoPlay
+        muted
+        playsInline
+        className="
+          absolute top-[-2%] left-[66%]
+          -translate-x-1/3
+          w-[100vw] max-w-[1110px] object-cover z-10
+        "
+      />
+
+      {/* Signature of Emilee & Stella */}
+      <video
+        id="sign"
+        src={sign}
+        autoPlay
+        muted
+        playsInline
+        className="
+          absolute top-[-5%] left-[64%] 
+          -translate-x-1/4
+          w-[100vw] max-w-[920px] object-cover z-10
+        "
+      />
+
+      {/* mid-ground hill with responsive heights */}
+      <div
         id="midHill"
-        src={midHill}
-        alt=""
-        className="layer bottom-0 w-full object-cover"
-        aria-hidden="true"
+        className={`
+    absolute bottom-0 w-full overflow-hidden
+    bg-bottom bg-no-repeat bg-[length:100%_auto]
+    h-[60vh]      /* phones: 60% of viewport height */
+    md:h-[45vh]   /* tablets and up: 45% of viewport height */
+    lg:h-[70vh]   /* desktops and up: 70% of viewport height */
+    lg:bottom-[-17vh]       /* desktops slide a percent of the view below */a
+`}
+        style={{ backgroundImage: `url(${midHill})` }}
       />
-
-      {/* fore-ground hill */}
+      {/* ── 3 ▸ Stella cut-out on the hill ─────────────────────── */}
       <img
-        id="foreHill"
-        src={foreHill}
-        alt=""
-        className="layer bottom-0 w-full object-cover"
-        aria-hidden="true"
+        src={stella}
+        alt="Sustainable Stella"
+        className="
+          absolute bottom-[8%] left-1/4 -translate-x-1/2
+          w-[40vw] max-w-[480px] sm:w-[50vw] sm:max-w-[350px]
+          drop-shadow-lg z-20
+        "
       />
-
-      {/* Emilee front and center */}
+      {/* ── 3 ▸ Stella cut-out on the hill ─────────────────────── */}
       <img
-        src={emilee}
-        alt="Emilee – main character"
-        className="layer bottom-[10%] left-1/2 w-60 -translate-x-1/2 drop-shadow-lg"
+        src={friend}
+        alt="Sustainable Stella"
+        className="
+          absolute bottom-[8%] left-1/3 -translate-x-1/1
+          w-[40vw] max-w-[480px] sm:w-[50vw] sm:max-w-[800px]
+          drop-shadow-lg z-20
+        "
       />
 
-      {/* Headline */}
-      <h1 className="layer top-[20%] left-1/2 -translate-x-1/2 text-5xl font-extrabold drop-shadow-md">
-        Welcome to <span className="text-brandPink">Emilee’s World</span>
-      </h1>
+      {/* ── 1 ▸ hedge ─*/}
+      <img
+        src={hedge}
+        alt=""
+        aria-hidden="true"
+        className=" absolute inset-0          /* pin to edges of parent  */
+         w-full h-full             /* parent’s full size      */
+         object-contain            /* fit whole video, no crop*/
+
+         z-10
+       translate-y-[-35%]
+         pointer-events-none
+"
+      />
     </section>
   );
 }
